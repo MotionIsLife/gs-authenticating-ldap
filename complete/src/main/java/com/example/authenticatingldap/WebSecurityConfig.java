@@ -22,10 +22,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.ldapAuthentication()
-				.userDnPatterns("uid={0},ou=people")
+            .userDnPatterns("uid={0}")
+                .userSearchBase("ou=People")
 				.groupSearchBase("ou=groups")
 				.contextSource()
-					.url("ldap://localhost:8389/dc=springframework,dc=org")
+					.url("ldap://localhost:80/dc=example,dc=com")
 					.and()
 				.passwordCompare()
 					.passwordEncoder(new LdapShaPasswordEncoder())
